@@ -37,6 +37,11 @@ function gs() {
             this.options.push('-dNOPAUSE');
             return this;
         },
+        "password":        function (password) {
+            this.options.push('-sOwnerPassword=' + password);
+            this.options.push('-sUserPassword=' + password);
+            return this;
+        },
         "define":         function (key, val) {
             this.options.push('-d' + key + (val ? '=' + val : ''));
             return this;
@@ -86,7 +91,7 @@ function gs() {
                 var proc = spawn(this.excPath, this.options.concat([this._input]));
             } else {
                 var proc = spawn('gs', this.options.concat([this._input]));
-            }            
+            }
 
             proc.stdin.on('error', cb);
             proc.stdout.on('error', cb);
